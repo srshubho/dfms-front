@@ -2,19 +2,14 @@ import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 import { GiCow } from "react-icons/gi";
 import { BsBoxSeam } from "react-icons/bs";
+import { FaWarehouse } from "react-icons/fa";
+import React from "react";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
@@ -46,10 +41,24 @@ const Sidebar = () => {
               <span>Cows</span>
             </li>
           </Link>
-          <li>
-            <BsBoxSeam className="icon" />
-            <span>Suppliers</span>
-          </li>
+          <Link to="/calf" style={{ textDecoration: "none" }}>
+            <li>
+              <GiCow className="icon" />
+              <span>Calf</span>
+            </li>
+          </Link>
+          <Link to="/supplier" style={{ textDecoration: "none" }}>
+            <li>
+              <BsBoxSeam className="icon" />
+              <span>Suppliers</span>
+            </li>
+          </Link>
+          <Link to="/shade" style={{ textDecoration: "none" }}>
+            <li>
+              <FaWarehouse className="icon" />
+              <span>Shades</span>
+            </li>
+          </Link>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>

@@ -3,12 +3,19 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import Cows from "./pages/Cows/Cows";
+import Cows from "./pages/cow/Cows";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { productInputs, userInputs } from "./utils/formSource";
+import { productInputs, userInputs } from "./utils/dataSource";
 import "./style/dark.scss";
 import React, { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import Calf from "pages/calf/Calf";
+import SupplierList from "pages/supplier/SupplierList";
+import SingleSupplier from "pages/supplier/SingleSupplier";
+import AddSupplier from "pages/supplier/AddSupplier";
+import AddCalf from "pages/calf/AddCalf";
+import AddShade from "pages/shade/AddShade";
+import ShadeList from "pages/shade/ShadeList";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -42,6 +49,30 @@ function App() {
               <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
+              />
+            </Route>
+            <Route path="calf">
+              <Route index element={<Calf />} />
+              <Route path=":productId" element={<Single />} />
+              <Route
+                path="new"
+                element={<AddCalf title="Add Calf"></AddCalf>}
+              />
+            </Route>
+            <Route path="supplier">
+              <Route index element={<SupplierList />} />
+              <Route path=":supplierId" element={<SingleSupplier />} />
+              <Route
+                path="new"
+                element={<AddSupplier title="Add Supplier"></AddSupplier>}
+              />
+            </Route>
+            <Route path="shade">
+              <Route index element={<ShadeList />} />
+              <Route path=":supplierId" element={<SingleSupplier />} />
+              <Route
+                path="new"
+                element={<AddShade title="Add Shade"></AddShade>}
               />
             </Route>
           </Route>

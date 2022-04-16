@@ -2,7 +2,7 @@ import "./list.scss"
 import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import Datatable from "../../components/datatable/Datatable"
-import { userColumns, userRows } from "../../utils/datatablesource";
+import { userColumns, userRows } from "../../utils/dataSource";
 import React from "react";
 
 const List = () => {

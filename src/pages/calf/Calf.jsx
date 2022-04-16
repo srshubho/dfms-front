@@ -1,20 +1,19 @@
-import "./Cows.scss"
+
 import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import Datatable from "../../components/datatable/Datatable"
-import { cowColumns } from "../../utils/CowDataSource";
+import { calfColumns } from "../../utils/dataSource"
 import React, { useState, useEffect } from "react";
-import { getData, postData } from "../../apiCall";
+import { getData } from "../../apiCall";
 
-const Cows = () => {
-    const [cows, setCows] = useState([]);
-    const [cowRows, setCowRows] = useState([]);
+const Calf = () => {
+    const [calves, setCalves] = useState([]);
     async function fetchData() {
         try {
-            let res = await getData("cow")
-            setCows(res.data)
+            let res = await getData("calf")
+            setCalves(res.data)
             console.log(res.data)
-            console.log(cows[0].name)
+
 
 
         } catch (error) {
@@ -30,11 +29,11 @@ const Cows = () => {
             <Sidebar />
             <div className="listContainer">
                 <Navbar />
-                {cows.length && <Datatable rows={cows} columns={cowColumns} />}
-                {!cows.length && <div>Loading...</div>}
+                {calves.length && <Datatable rows={calves} columns={calfColumns} title="Calf" link="calf" />}
+                {!calves.length && <div>Loading...</div>}
             </div>
         </div>
     )
 }
 
-export default Cows
+export default Calf

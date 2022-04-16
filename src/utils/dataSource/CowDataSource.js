@@ -1,13 +1,13 @@
 export const cowColumns = [
 
     {
-        field: "name",
+        field: "cow_name",
         headerName: "Name",
         width: 230,
 
     },
     {
-        field: "estimated_live_weight",
+        field: "cow_estimated_live_weight",
         headerName: "Estimated Live Weight",
         width: 230,
     },
