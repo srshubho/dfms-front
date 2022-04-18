@@ -1,52 +1,41 @@
 import "../new/new.scss";
-import React from "react";
+
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import { useState, useEffect } from "react";
-import { getData, postData } from "../../apiCall";
-import { supplierfInputs as inputs } from "../../utils/inputs";
+import React, { useState, useEffect } from "react";
+import { MenuItem, Select, Snackbar, Alert } from "@mui/material";
+import { postData } from "../../apiCall";
+import { shadeInputs as inputs } from "../../utils/inputs";
+import { shade as model } from "../../utils/objects";
 import { useForm } from "react-hook-form";
-import { Snackbar, Alert } from "@mui/material";
 
-const AddSupplier = ({ title }) => {
+const EditShade = ({ title }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset } = useForm({
+        defaultValues: model
+    });
     const onSubmit = async data => {
+
         try {
-            const res = await postData("/supplier", data)
+            const res = await postData("/shade", data)
             console.log(data);
-            setError(false)
-            setOpen(true)
             reset()
+            setOpen(true)
         } catch (error) {
             setError(true)
             setOpen(true)
             console.log(error.response);
+
         }
     }
-
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen(false)
     }
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let res = await getData("/")
-                console.log(res.data)
 
-            } catch (error) {
-                console.log(error.response)
-            }
-        }
-
-        fetchData()
-        // fetchData()
-
-    }, []);
 
     return (
         <div className="new">
@@ -79,8 +68,24 @@ const AddSupplier = ({ title }) => {
                                     <input type={input.type} placeholder={input.placeholder} {...register(input.name)} />
                                 </div>
                             ))}
+                            {/* {inputs.length % 2 !== 0 && <div className="formInput" >
+
+                            </div>} */}
 
                             <div className="formInput" >
+                                <label>Shade Type</label>
+                                <Select
+                                    fullWidth
+                                    variant="standard"
+                                    defaultValue=""
+                                    {...register("shade_type")}
+                                >
+                                    <MenuItem value={100}>---Select---</MenuItem>
+                                    <MenuItem value={0}>Calf</MenuItem>
+                                    <MenuItem value={1}>Cow</MenuItem>
+
+
+                                </Select>
 
                             </div>
 
@@ -92,8 +97,9 @@ const AddSupplier = ({ title }) => {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };
 
-export default AddSupplier;
+export default EditShade;

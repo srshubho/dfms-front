@@ -17,13 +17,16 @@ const Datatable = ({ rows, columns, link, title }) => {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 250,
       renderCell: (params) => {
         console.log(params)
         return (
           <div className="cellAction">
             <Link to={`/${link}/${params.row.id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
+            </Link>
+            <Link to={`/${link}/edit/${params.row.id}`} style={{ textDecoration: "none" }}>
+              <div className="editButton">Edit</div>
             </Link>
             <div
               className="deleteButton"

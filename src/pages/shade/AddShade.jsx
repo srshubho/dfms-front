@@ -3,12 +3,14 @@ import "../new/new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import React, { useState, useEffect } from "react";
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select, Snackbar, Alert } from "@mui/material";
 import { postData } from "../../apiCall";
 import { shadeInputs as inputs } from "../../utils/inputs";
 import { useForm } from "react-hook-form";
 
 const AddShade = ({ title }) => {
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState(false);
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = async data => {
 
@@ -16,13 +18,20 @@ const AddShade = ({ title }) => {
             const res = await postData("/shade", data)
             console.log(data);
             reset()
+            setOpen(true)
         } catch (error) {
+            setError(true)
+            setOpen(true)
             console.log(error.response);
 
         }
     }
-
-
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false)
+    }
 
 
     return (
@@ -32,6 +41,16 @@ const AddShade = ({ title }) => {
                 <Navbar />
                 <div className="top">
                     <h1>{title}</h1>
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={3000}
+                        onClose={handleClose}
+
+
+                    >
+                        {error ? <Alert onClose={handleClose} severity="error"> Data Insertion failed!</Alert> : <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>Data inserted successfull!
+                        </Alert>}
+                    </Snackbar>
                 </div>
                 <div className="bottom">
                     <div className="side">
@@ -75,6 +94,7 @@ const AddShade = ({ title }) => {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };

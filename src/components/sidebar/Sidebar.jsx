@@ -35,7 +35,7 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/cows" style={{ textDecoration: "none" }}>
+          <Link to="/cow" style={{ textDecoration: "none" }}>
             <li>
               <GiCow className="icon" />
               <span>Cows</span>

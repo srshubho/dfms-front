@@ -3,23 +3,23 @@ export const calfColumns = [
     {
         field: "calf_name",
         headerName: "Name",
-        width: 230,
+        width: 100,
 
     },
     {
         field: "calf_estimated_live_weight",
         headerName: "Estimated Live Weight",
-        width: 230,
+        width: 200,
     },
     {
         field: "color_name",
         headerName: "Color",
-        width: 230,
+        width: 100,
     },
     {
         field: "shade_no",
-        headerName: "Shade Number",
-        width: 230,
+        headerName: "Shade No.",
+        width: 100,
     },
 
 

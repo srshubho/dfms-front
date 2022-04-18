@@ -5,20 +5,23 @@ import Navbar from "../../components/navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import { MenuItem, Select, Snackbar, Alert } from "@mui/material";
 import { getData, postData } from "../../apiCall";
-import { calfInputs as inputs } from "../../utils/inputs";
+import { purchasedInputs as inputs } from "../../utils/inputs";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
-const AddCalf = ({ title }) => {
+const AddCow = ({ title }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [colors, setColors] = useState([]);
+    const [suppliers, setSuppliers] = useState([]);
     const [shades, setShades] = useState([]);
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = async data => {
 
         try {
-            const res = await postData("/calf", data)
+            const res = await postData("/cow", data)
             console.log(data);
+            reset()
             setOpen(true)
         } catch (error) {
             setError(true)
@@ -41,7 +44,9 @@ const AddCalf = ({ title }) => {
                 let res = await getData("color")
                 console.log(res.data)
                 setColors(res.data)
-                res = await getData("shade_calf")
+                res = await getData("supplier")
+                setSuppliers(res.data)
+                res = await getData("shade_cow")
                 setShades(res.data)
 
             } catch (error) {
@@ -85,16 +90,13 @@ const AddCalf = ({ title }) => {
                                     <input type={input.type} placeholder={input.placeholder} {...register(input.name)} />
                                 </div>
                             ))}
-                            {/* {inputs.length % 2 !== 0 && <div className="formInput" >
-
-                            </div>} */}
                             <div className="formInput" >
                                 <label>Colors</label>
                                 <Select
                                     fullWidth
                                     variant="standard"
                                     defaultValue=""
-                                    {...register("calf_color_id")}
+                                    {...register("cow_color_id")}
                                 >
                                     <MenuItem value={100}>---Select---</MenuItem>
 
@@ -107,17 +109,17 @@ const AddCalf = ({ title }) => {
 
                             </div>
                             <div className="formInput" >
-                                <label>Shades</label>
+                                <label>Suppliers</label>
                                 <Select
                                     fullWidth
                                     variant="standard"
                                     defaultValue=""
-                                    {...register("calf_shade_id")}
+                                    {...register("cow_supplier_id")}
                                 >
                                     <MenuItem value={100}>---Select---</MenuItem>
 
-                                    {shades.length && shades.map((option, i) => (
-                                        <MenuItem value={option.id} key={option.id}>{option.shade_no}</MenuItem>
+                                    {suppliers.length && suppliers.map((option, i) => (
+                                        <MenuItem value={option.id} key={option.id}>{option.supplier_name}</MenuItem>
 
                                     ))}
 
@@ -130,7 +132,7 @@ const AddCalf = ({ title }) => {
                                     fullWidth
                                     variant="standard"
                                     defaultValue=""
-                                    {...register("calf_gender")}
+                                    {...register("cow_gender")}
                                 >
                                     <MenuItem value={100}>---Select---</MenuItem>
                                     <MenuItem value={0}>Male</MenuItem>
@@ -140,17 +142,40 @@ const AddCalf = ({ title }) => {
                                 </Select>
 
                             </div>
+                            <div className="formInput" >
+                                <label>Shades</label>
+                                <Select
+                                    fullWidth
+                                    variant="standard"
+                                    defaultValue=""
+                                    {...register("cow_shade_id")}
+                                >
+                                    <MenuItem value={100}>---Select---</MenuItem>
 
+                                    {shades.length && shades.map((option, i) => (
+                                        <MenuItem value={option.id} key={option.id}>{option.shade_no}</MenuItem>
+
+                                    ))}
+
+                                </Select>
+
+                            </div>
+                            {/* <div className="formInput" >
+
+                            </div> */}
                             <button type="submit">Send</button>
                         </form>
+                        <Link to="/cow/inhouse" >
+                            <p>Already in the house?</p>
+                        </Link>
                     </div>
                     <div className="side">
 
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
-export default AddCalf;
+export default AddCow;

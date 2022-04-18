@@ -3,19 +3,21 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import Cows from "./pages/cow/Cows";
+import CowList from "./pages/cow/CowList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./utils/dataSource";
 import "./style/dark.scss";
 import React, { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import Calf from "pages/calf/Calf";
+import CalfList from "pages/calf/CalfList";
 import SupplierList from "pages/supplier/SupplierList";
 import SingleSupplier from "pages/supplier/SingleSupplier";
 import AddSupplier from "pages/supplier/AddSupplier";
 import AddCalf from "pages/calf/AddCalf";
 import AddShade from "pages/shade/AddShade";
 import ShadeList from "pages/shade/ShadeList";
+import AddCow from "pages/cow/AddCow";
+import InhouseCow from "pages/cow/InhouseCow";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -43,17 +45,18 @@ function App() {
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
             </Route>
-            <Route path="cows">
-              <Route index element={<Cows />} />
-              <Route path=":productId" element={<Single />} />
+            <Route path="cow">
+              <Route index element={<CowList />} />
+              <Route path=":cowId" element={<Single />} />
+              <Route path="inhouse" element={<InhouseCow title="Add Cow" />} />
               <Route
                 path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
+                element={<AddCow title="Add Cow" />}
               />
             </Route>
             <Route path="calf">
-              <Route index element={<Calf />} />
-              <Route path=":productId" element={<Single />} />
+              <Route index element={<CalfList />} />
+              <Route path=":calfId" element={<Single />} />
               <Route
                 path="new"
                 element={<AddCalf title="Add Calf"></AddCalf>}

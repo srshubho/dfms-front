@@ -1,4 +1,3 @@
-import "../single/single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import React, { useEffect, useState } from "react";
@@ -9,7 +8,11 @@ import { Link } from "react-router-dom";
 
 const SingleSupplier = () => {
     let params = useParams();
-    const [supplier, setSupplier] = useState({});
+    const [supplier, setSupplier] = useState({
+        supplier_name: "",
+        supplier_phone: "",
+        supplier_address: "",
+    });
     console.log(params.supplierId)
     useEffect(() => {
         const fetchData = async () => {

@@ -32,7 +32,8 @@ const ShadeList = () => {
             <Sidebar />
             <div className="listContainer">
                 <Navbar />
-                {shades.length ? <Datatable rows={shades} columns={shadeColumns} link="shade" title="Shade" /> : <div>Loading...</div>}
+                {shades.length && <Datatable rows={shades} columns={shadeColumns} link="shade" title="Shade" />}
+                {!shades.length && <Datatable rows={shades} columns={shadeColumns} link="shade" title="Shade" />}
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-
+import "./calf.scss"
 import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import Datatable from "../../components/datatable/Datatable"
@@ -6,7 +6,7 @@ import { calfColumns } from "../../utils/dataSource"
 import React, { useState, useEffect } from "react";
 import { getData } from "../../apiCall";
 
-const Calf = () => {
+const CalfList = () => {
     const [calves, setCalves] = useState([]);
     async function fetchData() {
         try {
@@ -30,10 +30,10 @@ const Calf = () => {
             <div className="listContainer">
                 <Navbar />
                 {calves.length && <Datatable rows={calves} columns={calfColumns} title="Calf" link="calf" />}
-                {!calves.length && <div>Loading...</div>}
+                {!calves.length && <Datatable rows={calves} columns={calfColumns} title="Calf" link="calf" />}
             </div>
         </div>
     )
 }
 
-export default Calf
+export default CalfList

@@ -31,7 +31,8 @@ const SupplierList = () => {
             <Sidebar />
             <div className="listContainer">
                 <Navbar />
-                {suppliers.length ? <Datatable rows={suppliers} columns={supplierColumns} link="supplier" title="Supplier" /> : <div>Loading...</div>}
+                {suppliers.length && <Datatable rows={suppliers} columns={supplierColumns} link="supplier" title="Supplier" />}
+                {!suppliers.length && <Datatable rows={suppliers} columns={supplierColumns} link="supplier" title="Supplier" />}
             </div>
         </div>
     )
